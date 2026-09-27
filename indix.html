@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" class="notranslate" translate="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- منع ترجمة المتصفحات التلقائية -->
+  <meta name="google" content="notranslate" />
+  <meta name="googlebot" content="notranslate" />
+
+  <title>ICT Computational Thinking Quiz - By Ms. Sabreen 🧠💻✨</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', 'Cairo', sans-serif; }
+    .shake-anim { animation: shake 0.4s ease-in-out; }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    .teacher-watermark {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.04;
+      transform: rotate(-25deg);
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #0f172a;
+      white-space: nowrap;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-amber-100 via-rose-50 to-sky-100 min-h-screen flex flex-col items-center justify-center p-3 sm:p-6 text-slate-800 relative select-none notranslate" translate="no">
+
+  <div class="w-full max-w-2xl bg-white/95 rounded-3xl border-4 border-white shadow-2xl p-6 sm:p-8 relative overflow-hidden notranslate" translate="no">
+    <div class="teacher-watermark">مس صابرين • Ms. Sabreen</div>
+    <div class="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-amber-400 via-pink-400 to-sky-400 z-10"></div>
+
+    <!-- شاشة إغلاق الكويز التلقائية (تظهر إذا كُتب CLOSED في الشيت) -->
+    <div id="closed-screen" class="hidden space-y-6 text-center py-6 relative z-10">
+      <div class="w-40 h-40 mx-auto rounded-full border-4 border-rose-300 shadow-xl overflow-hidden bg-rose-50">
+        <img src="https://i.postimg.cc/DzH5SBDF/swrty-krtwn.png" class="w-full h-full object-cover object-top" alt="مس صابرين">
+      </div>
+      <div class="space-y-2">
+        <h2 class="text-2xl sm:text-3xl font-black text-rose-600">الاختبار مغلق حالياً 🔒</h2>
+        <p class="text-slate-600 font-bold text-sm sm:text-base max-w-md mx-auto leading-relaxed">
+          عفواً يا بطل، انتهى موعد الاختبار وتم إغلاق استقبال الإجابات بواسطة <span class="text-indigo-600 font-extrabold">مس صابرين</span>.
+        </p>
+      </div>
+      <div class="inline-block bg-rose-50 border border-rose-200 text-rose-700 text-xs font-black px-4 py-2 rounded-xl">
+        تواصل مع المعلمة في حال وجود أي استفسار ✨
+      </div>
+    </div>
+
+    <!-- 1. شاشة البداية -->
+    <div id="start-screen" class="space-y-5 text-center py-2 relative z-10">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-black shadow-sm">
+        <span>👩‍🏫 إعداد وتصميم: مس صابرين (Ms. Sabreen)</span>
+      </div>
+
+      <div class="w-36 h-36 sm:w-40 sm:h-40 mx-auto rounded-full border-4 border-amber-300 shadow-xl overflow-hidden bg-amber-50">
+        <img id="intro-media" src="https://i.postimg.cc/DzH5SBDF/swrty-krtwn.png" class="w-full h-full object-cover object-top" alt="المعلمة مس صابرين">
+      </div>
+
+      <div>
+        <h1 id="quiz-main-title" class="text-2xl sm:text-3xl font-black text-slate-800 notranslate" translate="no">Computational Thinking Quiz! 🧠💻✨</h1>
+        <p class="text-slate-500 font-bold text-sm sm:text-base mt-1">مستعدون للتحدي يا أبطال مع مس صابرين للحصول على الدرجة الكاملة؟</p>
+      </div>
+
+      <div class="max-w-md mx-auto space-y-3 pt-1 text-left" dir="auto">
+        <div>
+          <label for="student-name" class="block text-sm font-extrabold text-slate-700 mb-1">Enter your name / أدخل اسمك: <span class="text-rose-500">*</span></label>
+          <input type="text" id="student-name" placeholder="مثال: عاصم محمد، مريم أحمد..." class="w-full px-4 py-3 rounded-2xl bg-slate-50 border-2 border-slate-200 text-slate-800 text-sm sm:text-base font-bold shadow-inner focus:outline-none focus:border-indigo-500" />
+        </div>
+
+        <div>
+          <label for="student-grade" class="block text-sm font-extrabold text-slate-700 mb-1">Enter your class & grade / أدخل الصف أو الفصل: <span class="text-rose-500">*</span></label>
+          <input type="text" id="student-grade" placeholder="مثال: خامس أول (5/1)، Grade 5A..." class="w-full px-4 py-3 rounded-2xl bg-slate-50 border-2 border-slate-200 text-slate-800 text-sm sm:text-base font-bold shadow-inner focus:outline-none focus:border-indigo-500" />
+        </div>
+
+        <p id="input-error" class="hidden text-xs text-rose-500 font-bold text-center">يرجى كتابة اسمك والصف أولاً للبدء!</p>
+
+        <button onclick="startQuiz()" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 hover:from-amber-500 hover:to-rose-500 text-white font-black text-lg shadow-lg shadow-amber-300/50 transform active:scale-95 transition cursor-pointer mt-2">
+          ابدأ الاختبار 🚀 Start Quiz
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. شاشة الأسئلة -->
+    <div id="quiz-screen" class="hidden space-y-5 relative z-10">
+      <div class="flex items-center justify-between bg-slate-50 p-3.5 sm:p-4 rounded-2xl border-2 border-slate-100 relative">
+        <div class="flex items-center gap-3 sm:gap-4 relative z-10">
+          <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl border-2 border-amber-300 overflow-hidden bg-amber-50 shrink-0 shadow-md">
+            <img id="live-media" src="https://i.postimg.cc/DzH5SBDF/swrty-krtwn.png" class="w-full h-full object-cover object-top" alt="المعلمة مس صابرين">
+          </div>
+          <div>
+            <div id="reaction-message" class="text-sm sm:text-base font-black text-slate-700">فكّر جيداً قبل الاختيار! 💡</div>
+            <div class="flex items-center gap-2 mt-1 flex-wrap">
+              <span id="student-display-tag" class="text-xs text-slate-600 font-extrabold bg-white px-2 py-0.5 rounded-md border border-slate-200 shadow-sm"></span>
+              <span id="grade-display-tag" class="text-xs text-indigo-700 font-extrabold bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-200 shadow-sm"></span>
+              <span class="text-[11px] text-amber-700 font-black bg-amber-100/70 px-2 py-0.5 rounded-md border border-amber-200">مس صابرين 👩‍🏫</span>
+            </div>
+          </div>
+        </div>
+        <div class="text-right shrink-0 relative z-10 notranslate" translate="no">
+          <span id="question-indicator" class="text-xs font-black text-slate-400 uppercase tracking-wider block">Question 1/7</span>
+          <span class="text-xs font-black text-amber-600 bg-amber-100 px-2 py-0.5 rounded-md">5 Pts</span>
+        </div>
+      </div>
+
+      <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+        <div id="progress-bar" class="bg-gradient-to-r from-amber-400 via-rose-400 to-indigo-500 h-full transition-all duration-300 w-0"></div>
+      </div>
+
+      <div class="py-1 notranslate" translate="no">
+        <h2 id="question-title" class="text-lg sm:text-xl font-bold text-slate-800 leading-snug"></h2>
+      </div>
+
+      <div id="options-container" class="space-y-2.5 notranslate" translate="no"></div>
+
+      <div class="pt-1">
+        <button id="next-btn" onclick="nextQuestion()" disabled class="w-full py-3.5 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-base shadow-md disabled:opacity-40 disabled:cursor-not-allowed transition cursor-pointer">
+          السؤال التالي ➔ Next Question
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. شاشة النتيجة النهائية -->
+    <div id="result-screen" class="hidden space-y-6 text-center py-3 relative z-10">
+      <div class="relative w-full max-w-lg mx-auto mb-2">
+        <div id="result-media-container" class="w-44 h-44 sm:w-48 sm:h-48 mx-auto rounded-3xl border-4 border-amber-300 shadow-xl overflow-hidden bg-amber-50 flex items-center justify-center">
+          <img id="final-media-img" src="https://i.postimg.cc/DzH5SBDF/swrty-krtwn.png" class="w-full h-full object-cover object-top" alt="المعلمة مس صابرين">
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <h2 id="result-title" class="text-2xl sm:text-3xl font-black text-slate-800"></h2>
+        <p id="result-subtitle" class="text-slate-600 text-sm sm:text-base font-bold max-w-md mx-auto"></p>
+      </div>
+
+      <div class="inline-block bg-slate-50 border-2 border-slate-200 rounded-3xl px-10 py-3.5 shadow-sm notranslate" translate="no">
+        <span class="text-xs uppercase tracking-wider font-extrabold text-slate-400 block">Total Score / النتيجة</span>
+        <span id="final-score" class="text-5xl font-black text-indigo-600"></span>
+        <span id="max-possible-score" class="text-slate-400 font-bold text-xl"> / 35</span>
+      </div>
+
+      <div class="text-left space-y-3 pt-2 border-t border-slate-100 notranslate" translate="no">
+        <h3 class="text-sm sm:text-base font-black text-slate-800 flex items-center gap-2">
+          <span>🔍 مراجعة الإجابات:</span>
+        </h3>
+        <div id="review-list" class="space-y-3 max-h-72 overflow-y-auto pr-1"></div>
+      </div>
+
+      <button onclick="restartQuiz()" class="w-full py-3.5 px-6 rounded-2xl bg-slate-800 hover:bg-slate-900 text-white font-bold transition cursor-pointer">
+        إعادة الاختبار 🔄 Retake Quiz
+      </button>
+    </div>
+
+    <!-- شريط التوقيع الثابت -->
+    <div class="mt-6 pt-3 border-t border-slate-100 text-center relative z-10">
+      <p class="text-xs font-bold text-slate-400">
+        🌸 مع تحيات <span class="text-indigo-600 font-black">مس صابرين (Ms. Sabreen)</span> | جميع الحقوق محفوظة ©
+      </p>
+    </div>
+
+  </div>
+
+  <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzJ2trp9NSfmrEucvKm_JprHJMnD2_cuNN0AByKSvy9s8N31cT_rujuwV_d44Ur4j38Yw/exec";
+
+    const MEDIA_ASSETS = {
+      defaultState:     "https://i.postimg.cc/DzH5SBDF/swrty-krtwn.png",
+      correctOK_GIF:    "https://i.postimg.cc/6qFf30Qx/Woman-gesturing-OK-and-thumbs-up-202609042127-ezgif-com-video-to-gif-converter.gif",
+      wrongWarning_GIF: "https://i.postimg.cc/CKsxvxT1/Female-teacher-wagging-finger-202609042136-ezgif-com-video-to-gif-converter.gif",
+      finalLoseEmbed:   "https://www.youtube.com/embed/hhf4B3xWaFs?autoplay=1&rel=0"
+    };
+
+    window.addEventListener("DOMContentLoaded", () => {
+      if (!GOOGLE_SCRIPT_URL) return;
+      fetch(GOOGLE_SCRIPT_URL)
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.isOpen === false) {
+            document.getElementById("start-screen").classList.add("hidden");
+            document.getElementById("quiz-screen").classList.add("hidden");
+            document.getElementById("result-screen").classList.add("hidden");
+            document.getElementById("closed-screen").classList.remove("hidden");
+          }
+        })
+        .catch(err => console.log("Live check passed"));
+    });
+
+    const preloadedCorrect = new Image();
+    preloadedCorrect.src = MEDIA_ASSETS.correctOK_GIF;
+    const preloadedWrong = new Image();
+    preloadedWrong.src = MEDIA_ASSETS.wrongWarning_GIF;
+
+    const questionsData = [
+      {
+        id: 1,
+        type: "tf",
+        question: "Q1- Computational thinking is an organized way of thinking that helps us solve problems in a way similar to how a computer works.",
+        options: [
+          { text: "True (صح) ✔️", isCorrect: true },
+          { text: "False (خطأ) ❌", isCorrect: false }
+        ]
+      },
+      {
+        id: 2,
+        type: "tf",
+        question: "Q2- Pattern recognition helps us notice similarities between different problems to make solving them easier.",
+        options: [
+          { text: "True (صح) ✔️", isCorrect: true },
+          { text: "False (خطأ) ❌", isCorrect: false }
+        ]
+      },
+      {
+        id: 3,
+        type: "tf",
+        question: "Q3- Decomposition means focusing on important information and ignoring unnecessary details.",
+        options: [
+          { text: "True (صح) ✔️", isCorrect: false },
+          { text: "False (خطأ) ❌", isCorrect: true }
+        ]
+      },
+      {
+        id: 4,
+        type: "tf",
+        question: "Q4- Algorithm design means creating clear and ordered steps to solve a problem.",
+        options: [
+          { text: "True (صح) ✔️", isCorrect: true },
+          { text: "False (خطأ) ❌", isCorrect: false }
+        ]
+      },
+      {
+        id: 5,
+        type: "tf",
+        question: "Q5- The steps for solving a problem are completely separate and have no relationship to the steps of computational thinking.",
+        options: [
+          { text: "True (صح) ✔️", isCorrect: false },
+          { text: "False (خطأ) ❌", isCorrect: true }
+        ]
+      },
+      {
+        id: 6,
+        type: "tf",
+        question: "Q6- When identifying the inputs and outputs of a problem, we use the skill of abstraction.",
+        options: [
+          { text: "True (صح) ✔️", isCorrect: true },
+          { text: "False (خطأ) ❌", isCorrect: false }
+        ]
+      },
+      {
+        id: 7,
+        type: "mcq",
+        question: "Q7- Which of the following represents the first and basic step in computational thinking when facing a new problem?",
+        options: [
+          { text: "Pattern Recognition", isCorrect: false },
+          { text: "Decomposition", isCorrect: true },
+          { text: "Algorithm Design", isCorrect: false },
+          { text: "Abstraction", isCorrect: false }
+        ]
+      }
+    ];
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(isCorrect) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const now = audioCtx.currentTime;
+
+      if (isCorrect) {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, now);
+        osc.frequency.setValueAtTime(659.25, now + 0.1);
+        osc.frequency.setValueAtTime(783.99, now + 0.2);
+        osc.frequency.setValueAtTime(1046.50, now + 0.3);
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.5);
+      } else {
+        const notes = [
+          { freq: 293.66, time: 0,    dur: 0.18 },
+          { freq: 277.18, time: 0.20, dur: 0.18 },
+          { freq: 261.63, time: 0.40, dur: 0.18 },
+          { freq: 246.94, time: 0.60, dur: 0.55 }
+        ];
+
+        notes.forEach((n, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(n.freq, now + n.time);
+          if (idx === 3) osc.frequency.linearRampToValueAtTime(215, now + n.time + n.dur);
+          gain.gain.setValueAtTime(0.2, now + n.time);
+          gain.gain.exponentialRampToValueAtTime(0.01, now + n.time + n.dur);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + n.time);
+          osc.stop(now + n.time + n.dur);
+        });
+      }
+    }
+
+    let currentIdx = 0;
+    let studentName = "";
+    let studentGrade = "";
+    let studentAnswers = [];
+
+    function startQuiz() {
+      const nameInput = document.getElementById("student-name");
+      const gradeInput = document.getElementById("student-grade");
+      const nameVal = nameInput.value.trim();
+      const gradeVal = gradeInput.value.trim();
+
+      if (!nameVal || !gradeVal) {
+        document.getElementById("input-error").classList.remove("hidden");
+        if (!nameVal) nameInput.focus();
+        else gradeInput.focus();
+        return;
+      }
+
+      document.getElementById("input-error").classList.add("hidden");
+      studentName = nameVal;
+      studentGrade = gradeVal;
+      currentIdx = 0;
+      studentAnswers = [];
+
+      document.getElementById("start-screen").classList.add("hidden");
+      document.getElementById("result-screen").classList.add("hidden");
+      document.getElementById("quiz-screen").classList.remove("hidden");
+
+      document.getElementById("student-display-tag").innerText = `الطالب: ${studentName}`;
+      document.getElementById("grade-display-tag").innerText = `الصف: ${studentGrade}`;
+
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const q = questionsData[currentIdx];
+      document.getElementById("question-indicator").innerText = `Question ${currentIdx + 1}/${questionsData.length}`;
+      document.getElementById("progress-bar").style.width = `${((currentIdx) / questionsData.length) * 100}%`;
+      document.getElementById("question-title").innerText = `${q.question}`;
+
+      const mediaElement = document.getElementById("live-media");
+      mediaElement.src = MEDIA_ASSETS.defaultState;
+
+      const reactionMsg = document.getElementById("reaction-message");
+      reactionMsg.innerText = `فكّر جيداً يا ${studentName}! 💡`;
+      reactionMsg.className = "text-sm sm:text-base font-black text-slate-700";
+
+      const optionsBox = document.getElementById("options-container");
+      optionsBox.innerHTML = "";
+      document.getElementById("next-btn").disabled = true;
+
+      if (q.type === "tf") {
+        optionsBox.className = "grid grid-cols-2 gap-3 notranslate";
+      } else {
+        optionsBox.className = "space-y-2.5 notranslate";
+      }
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.setAttribute("translate", "no");
+
+        if (q.type === "tf") {
+          btn.className = "w-full text-center p-4 sm:p-5 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-amber-50 hover:border-amber-300 font-extrabold text-slate-700 transition duration-150 flex flex-col items-center justify-center gap-2 cursor-pointer shadow-sm active:scale-95 notranslate";
+          const icon = opt.text.includes("True") ? "✔️" : "❌";
+          const label = opt.text.includes("True") ? "True" : "False";
+          btn.innerHTML = `
+            <span class="text-3xl">${icon}</span>
+            <span class="text-base sm:text-lg">${label}</span>
+          `;
+        } else {
+          btn.className = "w-full text-left p-3.5 sm:p-4 rounded-2xl border-2 border-slate-200 bg-slate-50 hover:bg-amber-50 hover:border-amber-300 font-bold text-slate-700 transition duration-150 flex items-center justify-between cursor-pointer active:scale-[0.98] notranslate";
+          btn.innerHTML = `
+            <div class="flex items-center gap-3">
+              <span class="w-7 h-7 rounded-xl bg-white border border-slate-300 text-xs font-black text-slate-500 flex items-center justify-center shadow-sm">${String.fromCharCode(65 + idx)}</span>
+              <span class="text-sm sm:text-base notranslate" translate="no">${opt.text}</span>
+            </div>
+            <span class="w-5 h-5 rounded-full border-2 border-slate-300 flex items-center justify-center"></span>
+          `;
+        }
+
+        btn.onclick = () => selectOption(idx);
+        optionsBox.appendChild(btn);
+      });
+    }
+
+    function selectOption(selectedIdx) {
+      const q = questionsData[currentIdx];
+      studentAnswers[currentIdx] = selectedIdx;
+
+      const isCorrect = q.options[selectedIdx].isCorrect;
+      const optionsBox = document.getElementById("options-container");
+      const buttons = optionsBox.querySelectorAll("button");
+      const mediaElement = document.getElementById("live-media");
+      const reactionMsg = document.getElementById("reaction-message");
+
+      buttons.forEach((btn, idx) => {
+        btn.disabled = true;
+        btn.classList.remove("hover:bg-amber-50", "hover:border-amber-300", "cursor-pointer", "active:scale-95", "active:scale-[0.98]");
+
+        if (q.type === "tf") {
+          if (idx === selectedIdx) {
+            if (isCorrect) {
+              btn.className = "w-full text-center p-4 sm:p-5 rounded-2xl border-4 border-emerald-500 bg-emerald-50 text-emerald-900 font-extrabold flex flex-col items-center justify-center gap-2 shadow-lg notranslate";
+            } else {
+              btn.className = "w-full text-center p-4 sm:p-5 rounded-2xl border-4 border-rose-500 bg-rose-50 text-rose-900 font-extrabold flex flex-col items-center justify-center gap-2 shake-anim shadow-lg notranslate";
+            }
+          } else if (q.options[idx].isCorrect) {
+            btn.className = "w-full text-center p-4 sm:p-5 rounded-2xl border-2 border-emerald-300 bg-emerald-50/50 text-emerald-800 font-extrabold flex flex-col items-center justify-center gap-2 opacity-80 notranslate";
+          } else {
+            btn.className = "w-full text-center p-4 sm:p-5 rounded-2xl border-2 border-slate-100 bg-slate-50 text-slate-400 font-extrabold flex flex-col items-center justify-center gap-2 opacity-50 notranslate";
+          }
+        } else {
+          if (idx === selectedIdx) {
+            if (isCorrect) {
+              btn.className = "w-full text-left p-3.5 sm:p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-extrabold flex items-center justify-between shadow-sm notranslate";
+              btn.children[1].className = "w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs";
+              btn.children[1].innerHTML = "✓";
+            } else {
+              btn.className = "w-full text-left p-3.5 sm:p-4 rounded-2xl border-2 border-rose-500 bg-rose-50 text-rose-900 font-extrabold flex items-center justify-between shake-anim shadow-sm notranslate";
+              btn.children[1].className = "w-5 h-5 rounded-full bg-rose-500 text-white flex items-center justify-center text-xs";
+              btn.children[1].innerHTML = "✕";
+            }
+          } else if (q.options[idx].isCorrect) {
+            btn.className = "w-full text-left p-3.5 sm:p-4 rounded-2xl border-2 border-emerald-400 bg-emerald-50/50 text-emerald-800 font-bold flex items-center justify-between notranslate";
+            btn.children[1].className = "w-5 h-5 rounded-full bg-emerald-400 text-white flex items-center justify-center text-xs";
+            btn.children[1].innerHTML = "✓";
+          } else {
+            btn.className = "w-full text-left p-3.5 sm:p-4 rounded-2xl border-2 border-slate-100 bg-slate-50 text-slate-400 opacity-60 flex items-center justify-between notranslate";
+          }
+        }
+      });
+
+      if (isCorrect) {
+        playSound(true);
+        mediaElement.src = MEDIA_ASSETS.correctOK_GIF;
+        reactionMsg.innerText = `برافو يا ${studentName}! 🌟 مس صابرين فخورة بك!`;
+        reactionMsg.className = "text-sm sm:text-base font-black text-emerald-600";
+      } else {
+        playSound(false);
+        mediaElement.src = MEDIA_ASSETS.wrongWarning_GIF;
+        reactionMsg.innerText = `ركز يا ${studentName}! 🤔 راجع درس مس صابرين`;
+        reactionMsg.className = "text-sm sm:text-base font-black text-rose-600";
+      }
+
+      document.getElementById("next-btn").disabled = false;
+    }
+
+    function nextQuestion() {
+      currentIdx++;
+      if (currentIdx < questionsData.length) {
+        renderQuestion();
+      } else {
+        showFinalResult();
+      }
+    }
+
+    function sendDataToGoogleSheet(name, grade, score, wrong) {
+      if (!GOOGLE_SCRIPT_URL) return;
+      const payload = { 
+        name: name, 
+        grade: grade, 
+        score: score, 
+        wrongCount: wrong 
+      };
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }).catch(err => console.log("Done"));
+    }
+
+    function showFinalResult() {
+      document.getElementById("quiz-screen").classList.add("hidden");
+      document.getElementById("result-screen").classList.remove("hidden");
+
+      let totalScore = 0;
+      let wrongCount = 0;
+      const reviewBox = document.getElementById("review-list");
+      reviewBox.innerHTML = "";
+
+      questionsData.forEach((q, idx) => {
+        const choiceIdx = studentAnswers[idx];
+        const studentChoice = q.options[choiceIdx];
+        const isCorrect = studentChoice && studentChoice.isCorrect;
+        const correctChoice = q.options.find(o => o.isCorrect);
+
+        if (isCorrect) totalScore += 5;
+        else wrongCount++;
+
+        const item = document.createElement("div");
+        item.className = `p-3.5 rounded-2xl border-2 ${isCorrect ? 'border-emerald-200 bg-emerald-50/70' : 'border-rose-200 bg-rose-50/70'} space-y-1.5 notranslate`;
+        item.setAttribute("translate", "no");
+
+        let reviewStudentChoiceText = studentChoice ? studentChoice.text : 'لم تجب';
+        let reviewCorrectChoiceText = correctChoice.text;
+
+        if (q.type === "tf") {
+          reviewStudentChoiceText = studentChoice ? (studentChoice.text.includes("True") ? "True (صح)" : "False (خطأ)") : 'لم تجب';
+          reviewCorrectChoiceText = correctChoice.text.includes("True") ? "True (صح)" : "False (خطأ)";
+        }
+
+        item.innerHTML = `
+          <div class="flex justify-between items-start gap-2">
+            <span class="text-xs sm:text-sm font-bold text-slate-800 notranslate" translate="no">${q.question}</span>
+            <span class="text-xs font-black px-2 py-0.5 rounded-lg shrink-0 ${isCorrect ? 'bg-emerald-200 text-emerald-800' : 'bg-rose-200 text-rose-800'}">
+              ${isCorrect ? '+5' : '0'}
+            </span>
+          </div>
+          <div class="text-xs font-bold space-y-0.5 pt-0.5 notranslate" translate="no">
+            <p class="${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">إجابتك: ${reviewStudentChoiceText}</p>
+            ${!isCorrect ? `<p class="text-emerald-700">الإجابة الصحيحة: ${reviewCorrectChoiceText}</p>` : ''}
+          </div>
+        `;
+        reviewBox.appendChild(item);
+      });
+
+      const maxScore = questionsData.length * 5;
+      document.getElementById("final-score").innerText = totalScore;
+      document.getElementById("max-possible-score").innerText = ` / ${maxScore}`;
+
+      sendDataToGoogleSheet(studentName, studentGrade, `${totalScore} / ${maxScore}`, wrongCount);
+
+      const title = document.getElementById("result-title");
+      const subtitle = document.getElementById("result-subtitle");
+      const mediaContainer = document.getElementById("result-media-container");
+
+      if (wrongCount > 2) {
+        title.innerText = `يا خسارة تعب مس صابرين يا ${studentName}! 🥺`;
+        subtitle.innerText = `لقد أخطأت في ${wrongCount} أسئلة.. شاهدي هذا الفيديو بعناية ثم أعيدي المحاولة!`;
+        mediaContainer.className = "w-full max-w-sm mx-auto rounded-3xl border-4 border-rose-300 shadow-2xl overflow-hidden bg-black aspect-[9/16]";
+        mediaContainer.innerHTML = `
+          <iframe 
+            src="${MEDIA_ASSETS.finalLoseEmbed}" 
+            frameborder="0" 
+            width="100%" 
+            height="100%" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen 
+            class="w-full h-full">
+          </iframe>
+        `;
+      } else {
+        title.innerText = `برافو يا ${studentName}! 🏆🎉`;
+        subtitle.innerText = wrongCount === 0 
+          ? `درجة نهائية كاملة ${maxScore}/${maxScore}! مس صابرين فخورة بك جداً!` 
+          : `ممتاز جداً! اجتزت اختبار مس صابرين بنجاح مع ${wrongCount} أخطاء فقط.`;
+
+        mediaContainer.className = "w-44 h-44 sm:w-48 sm:h-48 mx-auto rounded-3xl border-4 border-emerald-400 shadow-xl overflow-hidden bg-emerald-50 flex items-center justify-center";
+        mediaContainer.innerHTML = `
+          <img src="${MEDIA_ASSETS.correctOK_GIF}" class="w-full h-full object-cover object-top" alt="مبروك">
+        `;
+      }
+    }
+
+    function restartQuiz() {
+      document.getElementById("result-screen").classList.add("hidden");
+      document.getElementById("start-screen").classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>
